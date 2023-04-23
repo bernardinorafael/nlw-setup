@@ -26,13 +26,13 @@ export function SummaryTable() {
   const dateFormatter = (date: Date) => dayjs(date).format('D [de] MMMM [de] YYYY')
 
   return (
-    <div className="flex w-full rounded-2xl border border-zinc-800 p-4">
-      <div className="grid grid-flow-row grid-rows-7 gap-1">
+    <div className="flex flex-col gap-5 overflow-y-auto overscroll-contain rounded-2xl border border-zinc-800">
+      <div className="sticky top-0 flex items-center justify-between gap-2 bg-zinc-950 p-4 pb-0">
         {weekDays.map((weekDay, i) => {
           return (
             <div
               key={`${weekDay}-${i}`}
-              className="flex h-10 w-10 items-center justify-center text-xl font-bold text-zinc-400"
+              className="flex h-12 w-12 items-center justify-center text-xl font-bold text-zinc-400"
             >
               {weekDay}
             </div>
@@ -40,24 +40,26 @@ export function SummaryTable() {
         })}
       </div>
 
-      <div className="grid grid-flow-col grid-rows-7 gap-2">
-        {summaryDates.map((date) => {
-          const dayInSummary = summary.data?.summary.find((day) => {
-            return dayjs(date).isSame(day.date, 'day')
-          })
+      <div className="flex flex-row flex-wrap justify-between gap-2 px-4 pb-4">
+        {summaryDates
+          .map((date) => {
+            const dayInSummary = summary.data?.summary.find((day) => {
+              return dayjs(date).isSame(day.date, 'day')
+            })
 
-          return (
-            <Tooltip key={date.toString()} render={dateFormatter(date)}>
-              <div>
-                <HabitDay
-                  amount={dayInSummary?.amount}
-                  completed={dayInSummary?.completed}
-                  date={date}
-                />
-              </div>
-            </Tooltip>
-          )
-        })}
+            return (
+              <Tooltip key={date.toString()} render={dateFormatter(date)}>
+                <div>
+                  <HabitDay
+                    amount={dayInSummary?.amount}
+                    completed={dayInSummary?.completed}
+                    date={date}
+                  />
+                </div>
+              </Tooltip>
+            )
+          })
+          .reverse()}
       </div>
     </div>
   )

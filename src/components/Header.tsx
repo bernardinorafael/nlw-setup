@@ -10,7 +10,7 @@ export function Header() {
 
       <Dialog title="Criar hábito" render={<CreateHabitForm />}>
         <button
-          className="flex cursor-default items-center justify-center gap-2 rounded-full border-none bg-violet-800 px-4 py-2 font-semibold outline-2 outline-offset-2 outline-violet-800 hover:bg-violet-700 hover:transition-all focus:outline focus:transition-none"
+          className="flex cursor-default items-center justify-center gap-2 rounded-sm border-none bg-violet-800 px-4 py-2 font-semibold outline-2 outline-offset-2 outline-violet-800 hover:bg-violet-700 hover:transition-all focus:outline focus:transition-none"
           type="button"
         >
           <Plus weight="bold" size={20} />

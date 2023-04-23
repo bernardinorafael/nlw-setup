@@ -23,7 +23,7 @@ export function HabitDay(props: HabitDayProps) {
   return (
     <PopoverComponent.Root {...rest}>
       <PopoverComponent.Trigger
-        className={clsx('aspect-square h-8 rounded-md border-2', {
+        className={clsx('aspect-square h-12 rounded-md border-2 transition-colors', {
           'border-zinc-800 bg-zinc-900': completedPercentage === 0,
           'border-violet-800 bg-violet-900':
             completedPercentage > 0 && completedPercentage < 20,
@@ -33,7 +33,7 @@ export function HabitDay(props: HabitDayProps) {
             completedPercentage >= 40 && completedPercentage < 60,
           'border-violet-500 bg-violet-600':
             completedPercentage >= 60 && completedPercentage < 80,
-          'border-violet-400 bg-violet-500': completedPercentage > 80,
+          'border-violet-400 bg-violet-500': completedPercentage >= 80,
         })}
       />
 

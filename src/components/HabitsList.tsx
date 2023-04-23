@@ -71,7 +71,7 @@ export function HabitsList(props: HabitsListProps) {
             })
           ) : (
             <div
-              className={clsx('flex w-full items-center justify-center ', {
+              className={clsx('flex w-full items-center justify-center', {
                 'opacity-30': isDateInPast,
               })}
             >

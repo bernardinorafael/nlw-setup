@@ -1,13 +1,13 @@
+import './styles/global.css'
+import '@/lib/dayjs'
+
 import { Header } from './components/Header'
 import { SummaryTable } from './components/SummaryTable'
-import './styles/global.css'
-
-import '@/lib/dayjs'
 
 export function App() {
   return (
-    <main className="flex h-screen w-screen items-center justify-center">
-      <div className="flex w-full max-w-5xl flex-col gap-10 px-6">
+    <main className="flex h-screen justify-center py-10">
+      <div className="flex max-h-[820px] max-w-[480px] flex-col gap-10 px-6">
         <Header />
         <SummaryTable />
       </div>
