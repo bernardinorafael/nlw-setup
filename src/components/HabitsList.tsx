@@ -4,6 +4,7 @@ import { api } from '@/lib/axios'
 import { Loader } from './Loader'
 import dayjs from 'dayjs'
 import { queryClient } from '@/lib/react-query'
+import clsx from 'clsx'
 
 interface HabitsListProps {
   date: Date
@@ -54,7 +55,10 @@ export function HabitsList(props: HabitsListProps) {
               return (
                 <label
                   key={habit.id}
-                  className="flex cursor-default select-none flex-row items-center gap-2 text-sm font-bold"
+                  className={clsx(
+                    'flex cursor-default select-none flex-row items-center gap-2 text-sm font-bold',
+                    { 'opacity-30': isDateInPast },
+                  )}
                 >
                   <Checkbox
                     disabled={isDateInPast}
@@ -66,7 +70,11 @@ export function HabitsList(props: HabitsListProps) {
               )
             })
           ) : (
-            <div className="flex w-full items-center justify-center p-4">
+            <div
+              className={clsx('flex w-full items-center justify-center ', {
+                'opacity-30': isDateInPast,
+              })}
+            >
               <strong>Nenhum hábito encontrado.</strong>
             </div>
           )}

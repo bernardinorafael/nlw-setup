@@ -18,6 +18,8 @@ export function HabitDay(props: HabitDayProps) {
   const shortTodayDate = dayjs(date).format('DD[/]MMM')
   const weekDayLong = dayjs(date).format('dddd')
 
+  const isDateInPast = dayjs(props.date).endOf('day').isBefore(new Date())
+
   return (
     <PopoverComponent.Root {...rest}>
       <PopoverComponent.Trigger
@@ -37,7 +39,10 @@ export function HabitDay(props: HabitDayProps) {
 
       <PopoverComponent.Portal>
         <PopoverComponent.Content
-          className="flex w-[374px] flex-col gap-2 rounded border border-zinc-800 bg-zinc-900 p-4 shadow-2xl data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade"
+          className={clsx(
+            'flex w-[374px] flex-col gap-2 rounded border border-zinc-800 bg-zinc-900 p-4 shadow-4xl transition-all data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=top]:animate-slideDownAndFade',
+            { 'bg-zinc-900': isDateInPast },
+          )}
           sideOffset={5}
           arrowPadding={10}
         >
@@ -47,10 +52,22 @@ export function HabitDay(props: HabitDayProps) {
             width={14}
           />
 
-          <span className="ext-sm font-medium text-zinc-500">{weekDayLong}</span>
-          <span className="text-3xl font-bold leading-tight">{shortTodayDate}</span>
+          <span
+            className={clsx('ext-sm font-medium text-zinc-500', {
+              'opacity-30': isDateInPast,
+            })}
+          >
+            {weekDayLong}
+          </span>
+          <span
+            className={clsx('text-3xl font-bold leading-tight', {
+              'mb-4 opacity-30': isDateInPast,
+            })}
+          >
+            {shortTodayDate}
+          </span>
 
-          <ProgressBar progress={completedPercentage} />
+          {!isDateInPast && <ProgressBar progress={completedPercentage} />}
 
           <HabitsList date={date} />
         </PopoverComponent.Content>
