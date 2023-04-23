@@ -10,7 +10,7 @@ const ROOT = document.getElementById('root') as HTMLElement
 
 CONTAINER(ROOT).render(
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
+    <TooltipProvider delayDuration={500} skipDelayDuration={0}>
       <App />
     </TooltipProvider>
   </QueryClientProvider>,

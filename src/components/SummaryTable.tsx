@@ -3,6 +3,7 @@ import { generateDatesYearBeginning } from '@/util/generates-dates-year-beginnin
 import { useQuery } from '@tanstack/react-query'
 import { HabitDay } from './HabitDay'
 import dayjs from 'dayjs'
+import { Tooltip } from './primitives/Tooltip'
 
 interface Summary {
   summary: {
@@ -21,6 +22,8 @@ export function SummaryTable() {
 
   const weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
   const summaryDates = generateDatesYearBeginning()
+
+  const dateFormatter = (date: Date) => dayjs(date).format('D [de] MMMM [de] YYYY')
 
   return (
     <div className="flex w-full rounded-2xl border border-zinc-800 p-4">
@@ -44,12 +47,15 @@ export function SummaryTable() {
           })
 
           return (
-            <HabitDay
-              key={date.toString()}
-              amount={dayInSummary?.amount}
-              completed={dayInSummary?.completed}
-              date={date}
-            />
+            <Tooltip key={date.toString()} render={dateFormatter(date)}>
+              <div>
+                <HabitDay
+                  amount={dayInSummary?.amount}
+                  completed={dayInSummary?.completed}
+                  date={date}
+                />
+              </div>
+            </Tooltip>
           )
         })}
       </div>
